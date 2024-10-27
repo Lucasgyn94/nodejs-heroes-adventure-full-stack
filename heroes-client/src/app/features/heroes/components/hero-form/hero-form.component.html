@@ -1,0 +1,70 @@
+<div class="hero-form">
+  <div class="hero-form__container">
+    <h2>{{isEditing ? 'Editar' : 'Criar'}}</h2>
+
+    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          [class.is-invalid]="heroForm.get('name')?.invalid && heroForm.get('name')?.touched"
+        >
+        <div class="invalid-feedback" *ngIf="heroForm.get('name')?.errors?.['required']">
+          Nome é obrigatório
+        </div>
+        <div class="invalid-feedback" *ngIf="heroForm.get('name')?.errors?.['minlength']">
+          Nome deve ter pelo menos 3 caracteres
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Idade</label>
+        <input
+          id="age"
+          type="text"
+          class="form-control"
+          formControlName="age"
+          [class.is-invalid]="heroForm.get('age')?.invalid && heroForm.get('age')?.touched"
+        >
+        <div class="invalid-feedback" *ngIf="heroForm.get('age')?.errors?.['required']">
+          Idade é obrigatória
+        </div>
+        <div class="invalid-feedback" *ngIf="heroForm.get('age')?.errors?.['min']">
+          Idade deve ser maior que 0
+        </div>
+
+        <div class="form-group">
+          <label for="type">Tipo</label>
+          <select
+            id="type"
+            class="form-control"
+            formControlName="type"
+            [class.is-invalid]="heroForm.get('type')?.invalid && heroForm.get('type')?.touched"
+          >
+            <option value="">Selecione um tipo</option>
+            <option *ngFor="let type of heroTypes" [value]="type.value">
+              {{type.label}}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="heroForm.get('type')?.errors?.['required']">
+            Tipo é obrigatório
+          </div>
+        </div>
+
+        <div class="hero-form__actions">
+          <button type="submit" class="btn btn-primary" >
+            {{isEditing ? 'Atualizar' : 'Criar'}} Herói
+          </button>
+
+          <button type="button" class="btn btn-secondary" (click)="goBack()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

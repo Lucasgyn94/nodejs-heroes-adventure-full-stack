@@ -1,0 +1,38 @@
+  <div class="hero-list">
+    <div class="hero-list__header">
+      <h2>Lista De Heróis</h2>
+      <button class="btn btn-primary" (click)="navigateToCreate()">
+        Criar Novo Herói
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Tipo</th>
+            <th>Estratégia de Ataque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hero of heroes">
+            <td>{{hero.name}}</td>
+            <td>{{hero.age}}</td>
+            <td>{{hero.type}}</td>
+            <td>{{hero.attackStrategy}}</td>
+            <td class="actions">
+              <button class="btn btn-sm btn-info" (click)="navigateToEdit(hero.id)">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteHero(hero.id)">
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
